@@ -28,6 +28,7 @@ export default function FrontTareas() {
       estado: data.get("Estado"),
     };
     putTareas(modid, dataInput);
+
     MySwal.fire({
       position: "top-start",
       icon: "success",
@@ -42,14 +43,14 @@ export default function FrontTareas() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data);
+
     var dataInput = {
       creador: data.get("Creador"),
       fecha: data.get("Fecha"),
       estado: data.get("Estado"),
     };
-
     postTareas(dataInput);
+
     MySwal.fire({
       position: "top-end",
       icon: "success",
@@ -60,6 +61,7 @@ export default function FrontTareas() {
     setReload(!reload);
     form.reset();
   };
+  
   function eliminarTarea (id){
     MySwal.fire({
       position: "top-end",
@@ -221,7 +223,7 @@ export default function FrontTareas() {
               <tr>
                 <td>{item.creador}</td>
                 <td>{item.fecha}</td>
-                <td>{item.estado}</td>
+                <td><b>{item.estado}</b></td>
               </tr>
               <button
                 type="button"
@@ -233,7 +235,7 @@ export default function FrontTareas() {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => eliminarTarea(item._id)}
+                onClick={() => eliminarTarea(item._id)} 
               >
                 Eliminar
               </button>

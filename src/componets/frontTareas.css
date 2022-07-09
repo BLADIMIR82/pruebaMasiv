@@ -26,7 +26,7 @@
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
   border-radius: 1em;
   backdrop-filter: blur(20px);
-  margin: 1rem;
+  margin: 0.3rem;
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   -ms-border-radius: 1em;
@@ -42,7 +42,7 @@
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
   border-radius: 1em;
   backdrop-filter: blur(20px);
-  margin: 1rem;
+  margin: 0.5rem;
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   -ms-border-radius: 1em;
@@ -57,4 +57,13 @@
 
 button {
   margin: 0.5rem;
+}
+tbody{
+  margin: 0.5rem;
+}
+td{
+  font-size: 1.2rem;
+}
+th{
+  font-size: 1.3rem;
 }

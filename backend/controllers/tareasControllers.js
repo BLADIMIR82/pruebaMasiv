@@ -33,8 +33,8 @@ const tareasControllers = {
       (respuesta) => res.json({ respuesta })
     );
     console.log(tareadb);
-  },
-
+  }, 
+ 
   deleteTareas: async (req, res) => {
     const id = req.params.id;
     await Tareas.findOneAndDelete({ _id: id }).then((respuesta) =>
@@ -42,5 +42,5 @@ const tareasControllers = {
     );
   },
 };
-
+     
 module.exports = tareasControllers;
