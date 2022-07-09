@@ -5,24 +5,36 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
 import { getTareas, postTareas, putTareas } from "./callsTareas";
 import "../componets/frontTareas.css";
 
 export default function FrontTareas() {
+
   const [tareas, setTareas] = useState();
   const [reload, setReload] = useState(false);
   const [modid, setModId] = useState();
+
   let form = document.getElementById("form");
   let form1 = document.getElementById("form1");
+  const MySwal = withReactContent(Swal);
 
   const modificarTarea = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     var dataInput = {
       fecha: data.get("Fecha"),
-      estado: data.get("Estado")
+      estado: data.get("Estado"),
     };
     putTareas(modid, dataInput);
+    MySwal.fire({
+      position: "top-start",
+      icon: "success",
+      title: "La tarea se ha modificado",
+      showConfirmButton: false,
+      timer: 1200,
+    });
     setReload(!reload);
     form1.reset();
   };
@@ -38,6 +50,13 @@ export default function FrontTareas() {
     };
 
     postTareas(dataInput);
+    MySwal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Se ha creado una nueva tarea",
+      showConfirmButton: false,
+      timer: 1200,
+    });
     setReload(!reload);
     form.reset();
   };
@@ -48,6 +67,9 @@ export default function FrontTareas() {
 
   return (
     <div className="container-principal">
+      <div>
+        <h1>Tareas</h1>
+      </div>
       <div className="container-form">
         <div>
           <h1>Crear Tarea</h1>
@@ -91,14 +113,17 @@ export default function FrontTareas() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
                       id="Estado"
-                      label="Estado"
                       name="Estado"
-                      autoComplete="Estado"
-                    />
+                    >
+                      <option selected>Seleccione Estado</option>
+                      <option value="Iniciado">Iniciado</option>
+                      <option value="En Proceso">En Proceso</option>
+                      <option value="Finalizado">Finalizado</option>
+                    </select>
                   </Grid>
                 </Grid>
                 <Button
@@ -135,23 +160,26 @@ export default function FrontTareas() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
-                      required
                       type="date"
                       fullWidth
                       id="Fecha"
                       name="Fecha"
                       autoComplete="Fecha"
+                      required
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
+                  <select
+                      class="form-select"
+                      aria-label="Default select example"
                       id="Estado"
-                      label="Estado"
                       name="Estado"
-                      autoComplete="Estado"
-                    />
+                    >
+                      <option selected>Seleccione Estado</option>
+                      <option value="Iniciado">Iniciado</option>
+                      <option value="En Proceso">En Proceso</option>
+                      <option value="Finalizado">Finalizado</option>
+                    </select>
                   </Grid>
                 </Grid>
                 <Button
@@ -168,9 +196,7 @@ export default function FrontTareas() {
         </div>
       </div>
 
-      <div>
-        <h1>Tareas</h1>
-      </div>
+      
       <div className="container-table">
         <table className="table">
           <thead>

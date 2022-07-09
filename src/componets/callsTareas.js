@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const getTareas = async () => {
-    try {
-        let data = await axios.get(`http://localhost:4001/api/alltareas`);
+  try {
+    let data = await axios.get(`http://localhost:4001/api/alltareas`);
     return data;
   } catch (error) {
     throw error;
