@@ -110,7 +110,7 @@ export default function FrontTareas() {
                       fullWidth
                       id="Creador"
                       label="Creador"
-                      autoFocus
+                      
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -125,12 +125,12 @@ export default function FrontTareas() {
                   </Grid>
                   <Grid item xs={12}>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       id="Estado"
                       name="Estado"
                     >
-                      <option selected>Seleccione Estado</option>
+                      <option selected >Seleccione Estado</option>
                       <option value="Iniciado">Iniciado</option>
                       <option value="En Proceso">En Proceso</option>
                       <option value="Finalizado">Finalizado</option>
@@ -181,7 +181,7 @@ export default function FrontTareas() {
                   </Grid>
                   <Grid item xs={12}>
                   <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       id="Estado"
                       name="Estado"
@@ -208,8 +208,8 @@ export default function FrontTareas() {
       </div>
 
       <div className="container-table">
-        <table className="table">
-          <thead>
+        <table className="table border-primary ">
+          <thead className= "table-primary">
             <tr>
               <th scope="col">Creador</th>
               <th scope="col">Fecha </th>

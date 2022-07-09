@@ -4,6 +4,6 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  background: rgb(81,245,111);
+  background: linear-gradient(90deg, rgba(81,245,111,1) 0%, rgba(68, 64, 64, 0.157) 0%);
 }

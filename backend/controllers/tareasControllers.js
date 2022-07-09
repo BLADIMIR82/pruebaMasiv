@@ -1,7 +1,7 @@
 const Tareas = require("../models/tareas");
 
 const tareasControllers = {
-  
+
   getTareas: async (req, res) => {
     let tareas;
     let error = null;
@@ -17,7 +17,7 @@ const tareasControllers = {
       error: error,
     });
   },
-
+ 
   postTareas: async (req, res) => {
     console.log(req.body);
     const { creador, fecha, estado } = req.body.dataInput;
