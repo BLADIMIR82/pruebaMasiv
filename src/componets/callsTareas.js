@@ -40,4 +40,5 @@ export const  deleteTareas = async (id) => {
     catch (error) {
         throw error
     }
-}
+};
+  
