@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
-import { getTareas, postTareas, putTareas } from "./callsTareas";
+import { getTareas, postTareas, putTareas, deleteTareas } from "./callsTareas";
 import "../componets/frontTareas.css";
 
 export default function FrontTareas() {
@@ -33,7 +33,7 @@ export default function FrontTareas() {
       icon: "success",
       title: "La tarea se ha modificado",
       showConfirmButton: false,
-      timer: 1200,
+      timer: 1500,
     });
     setReload(!reload);
     form1.reset();
@@ -55,11 +55,22 @@ export default function FrontTareas() {
       icon: "success",
       title: "Se ha creado una nueva tarea",
       showConfirmButton: false,
-      timer: 1200,
+      timer: 1500,
     });
     setReload(!reload);
     form.reset();
   };
+  function eliminarTarea (id){
+    MySwal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "La tarea se ha eliminado",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    deleteTareas(id);
+    setReload(!reload)
+}
 
   useEffect(() => {
     getTareas().then((response) => setTareas(response.data.response.tareas));
@@ -67,12 +78,12 @@ export default function FrontTareas() {
 
   return (
     <div className="container-principal">
-      <div>
-        <h1>Tareas</h1>
+      <div className="title-principal">
+        <h1>Modulo De Tareas</h1>
       </div>
       <div className="container-form">
         <div>
-          <h1>Crear Tarea</h1>
+          <h2>Crear Tarea</h2>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -139,7 +150,7 @@ export default function FrontTareas() {
           </Container>
         </div>
         <div>
-          <h1>Modificar Tarea</h1>
+          <h2>Modificar Tarea</h2>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -196,7 +207,6 @@ export default function FrontTareas() {
         </div>
       </div>
 
-      
       <div className="container-table">
         <table className="table">
           <thead>
@@ -219,6 +229,13 @@ export default function FrontTareas() {
                 onClick={() => setModId(item._id)}
               >
                 Modificar
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => eliminarTarea(item._id)}
+              >
+                Eliminar
               </button>
             </tbody>
           ))}

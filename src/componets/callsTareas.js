@@ -31,3 +31,13 @@ export const putTareas = async (id, dataInput) => {
     throw error;
   }
 };
+
+export const  deleteTareas = async (id) => {
+    try {
+        let data = await axios.delete(`http://localhost:4001/api/alltareas/${id}`)
+        return data
+    }
+    catch (error) {
+        throw error
+    }
+}
