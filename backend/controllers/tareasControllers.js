@@ -17,7 +17,7 @@ const tareasControllers = {
       error: error,
     });
   },
- 
+  
   postTareas: async (req, res) => {
     console.log(req.body);
     const { creador, fecha, estado } = req.body.dataInput;
