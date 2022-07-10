@@ -7,7 +7,7 @@ export const getTareas = async () => {
   } catch (error) {
     throw error;
   }
-};
+}; 
 export const postTareas = async (dataInput) => {
   console.log(dataInput);
   try {
