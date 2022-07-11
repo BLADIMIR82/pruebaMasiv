@@ -42,6 +42,6 @@ const tareasControllers = {
     );
   },
 };
-       
+           
 module.exports = tareasControllers;
     
