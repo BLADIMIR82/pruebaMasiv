@@ -7,9 +7,9 @@ const tareasControllers = {
     let error = null;
     try {
       tareas = await Tareas.find();
-    } catch (err) {
+    }catch (err) {
       error = err;
-      console.log(error);
+      // console.log(error);
     }
     res.json({
       response: error ? "ERROR" : { tareas },
@@ -17,22 +17,23 @@ const tareasControllers = {
       error: error,
     });
   },
-  
+      
   postTareas: async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { creador, fecha, estado } = req.body.dataInput;
-    new Tareas({ creador, fecha, estado })
+    await new Tareas({ creador, fecha, estado })
       .save()
       .then((respuesta) => res.json({ respuesta }));
   },
+
   putTareas: async (req, res) => {
     const id = req.params.id;
     const tarea = req.body.dataInput;
 
-    let tareadb = await Tareas.findOneAndUpdate({ _id: id }, tarea).then(
+    await Tareas.findOneAndUpdate({ _id: id }, tarea).then(
       (respuesta) => res.json({ respuesta })
     );
-    console.log(tareadb);
+    
   }, 
  
   deleteTareas: async (req, res) => {
