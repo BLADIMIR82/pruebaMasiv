@@ -9,7 +9,6 @@ const tareasControllers = {
       tareas = await Tareas.find();
     }catch (err) {
       error = err;
-      // console.log(error);
     }
     res.json({
       response: error ? "ERROR" : { tareas },
