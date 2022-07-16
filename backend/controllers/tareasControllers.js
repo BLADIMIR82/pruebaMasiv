@@ -1,5 +1,5 @@
 const Tareas = require("../models/tareas");
-    
+       
 const tareasControllers = {
 
   getTareas: async (req, res) => {

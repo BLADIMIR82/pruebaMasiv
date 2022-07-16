@@ -212,8 +212,6 @@ export default function FrontTareas(eliminarTarea ) {
       </div>
       {/* Table */}
       <Table 
-       eliminarTarea={eliminarTarea}
-       setModId={setModId}
      />
      
     </div>
