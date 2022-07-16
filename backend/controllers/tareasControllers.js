@@ -1,5 +1,5 @@
 const Tareas = require("../models/tareas");
-
+    
 const tareasControllers = {
 
   getTareas: async (req, res) => {
@@ -16,15 +16,15 @@ const tareasControllers = {
       error: error,
     });
   },
-      
+                           
   postTareas: async (req, res) => {
     // console.log(req.body);
-    const { creador, fecha, estado } = req.body.dataInput;
-    await new Tareas({ creador, fecha, estado })
+    const { creador,  fecha, tarea, estado } = req.body.dataInput;
+    await new Tareas({ creador,  fecha, tarea, estado })
       .save()
       .then((respuesta) => res.json({ respuesta }));
   },
-
+  
   putTareas: async (req, res) => {
     const id = req.params.id;
     const tarea = req.body.dataInput;

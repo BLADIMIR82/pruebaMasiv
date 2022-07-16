@@ -9,17 +9,18 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
 import { getTareas, postTareas, putTareas, deleteTareas } from "./callsTareas";
 import "../componets/frontTareas.css";
+import Table from "./table";
 
-export default function FrontTareas() {
 
-  const [tareas, setTareas] = useState();
+export default function FrontTareas(eliminarTarea ) {
+  //Hooks//
   const [reload, setReload] = useState(false);
   const [modid, setModId] = useState();
-
+  //vars//
   let form = document.getElementById("form");
   let form1 = document.getElementById("form1");
   const MySwal = withReactContent(Swal);
-
+//functions//
   const modificarTarea = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -27,6 +28,7 @@ export default function FrontTareas() {
       fecha: data.get("Fecha"),
       estado: data.get("Estado"),
     };
+    
     putTareas(modid, dataInput);
 
     MySwal.fire({
@@ -39,7 +41,6 @@ export default function FrontTareas() {
     setReload(!reload);
     form1.reset();
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -47,8 +48,10 @@ export default function FrontTareas() {
     var dataInput = {
       creador: data.get("Creador"),
       fecha: data.get("Fecha"),
+      tarea: data.get("Tarea"),
       estado: data.get("Estado"),
     };
+
     postTareas(dataInput);
 
     MySwal.fire({
@@ -62,22 +65,8 @@ export default function FrontTareas() {
     form.reset();
   };
   
-  function eliminarTarea (id){
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "La tarea se ha eliminado",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    deleteTareas(id);
-    setReload(!reload)
-}
-
-  useEffect(() => {
-    getTareas().then((response) => setTareas(response.data.response.tareas));
-  }, [reload]);
-
+  
+ 
   return (
     <div className="container-principal">
       <div className="title-principal">
@@ -125,6 +114,19 @@ export default function FrontTareas() {
                       autoComplete="Fecha"
                     />
                   </Grid>
+                     <Grid item xs={12}>
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      id="Tarea"
+                      name="Tarea"
+                    >
+                      <option selected >Seleccione Tarea</option>
+                      <option value="Tarea 1">Tarea 1</option>
+                      <option value="Tarea 2">Tarea 2</option>
+                      <option value="Tarea 3">Tarea 3</option>
+                    </select>
+                  </Grid>
                   <Grid item xs={12}>
                     <select
                       className="form-select"
@@ -166,7 +168,7 @@ export default function FrontTareas() {
               <Box
                 component="form"
                 noValidate
-                onSubmit={modificarTarea}
+                onSubmit={(modificarTarea, setModId)}
                 sx={{ mt: 3 }}
                 id="form1"
               >
@@ -208,41 +210,12 @@ export default function FrontTareas() {
           </Container>
         </div>
       </div>
-
-      <div className="container-table">
-        <table className="table border-primary ">
-          <thead className= "table-primary">
-            <tr>
-              <th scope="col">Creador</th>
-              <th scope="col">Fecha </th>
-              <th scope="col">Estado</th>
-            </tr>
-          </thead>
-          {tareas?.map((item, index) => (
-            <tbody key={index}>
-              <tr>
-                <td>{item.creador}</td>
-                <td>{item.fecha}</td>
-                <td><b>{item.estado}</b></td>
-              </tr>
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={() => setModId(item._id)}
-              >
-                Modificar
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={() => eliminarTarea(item._id)} 
-              >
-                Eliminar
-              </button>
-            </tbody>
-          ))}
-        </table>
-      </div>
+      {/* Table */}
+      <Table 
+       eliminarTarea={eliminarTarea}
+       setModId={setModId}
+     />
+     
     </div>
   );
 }
