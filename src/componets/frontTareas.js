@@ -9,18 +9,34 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
 import { getTareas, postTareas, putTareas, deleteTareas } from "./callsTareas";
 import "../componets/frontTareas.css";
-import Table from "./table";
 
 
-export default function FrontTareas(eliminarTarea ) {
+export default function FrontTareas() {
   //Hooks//
   const [reload, setReload] = useState(false);
   const [modid, setModId] = useState();
+  const [tareas, setTareas] = useState();
+
+  useEffect(() => {
+    getTareas().then((response) => setTareas(response.data.response.tareas));
+  }, [reload]);
+
   //vars//
   let form = document.getElementById("form");
   let form1 = document.getElementById("form1");
   const MySwal = withReactContent(Swal);
 //functions//
+function eliminarTarea (id){
+  MySwal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "La tarea se ha eliminado",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+  deleteTareas(id);
+  setReload(!reload)
+}
   const modificarTarea = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -168,7 +184,7 @@ export default function FrontTareas(eliminarTarea ) {
               <Box
                 component="form"
                 noValidate
-                onSubmit={(modificarTarea, setModId)}
+                onSubmit={(modificarTarea)}
                 sx={{ mt: 3 }}
                 id="form1"
               >
@@ -211,8 +227,42 @@ export default function FrontTareas(eliminarTarea ) {
         </div>
       </div>
       {/* Table */}
-      <Table 
-     />
+      <div className="container-table">
+        <table className="table border-primary ">
+          <thead className= "table-primary">
+            <tr>
+              <th scope="col">Creador</th>
+              <th scope="col">Fecha </th>
+              <th scope="col">Tarea </th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          {tareas?.map((item, index) => (
+            <tbody key={index}>
+              <tr>
+                <td>{item.creador}</td>
+                <td><b>{item.fecha}</b></td>
+                <td>{item.tarea}</td>
+                <td><b>{item.estado}</b></td>
+              </tr>
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => setModId(item._id)}
+              >
+                Modificar
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => eliminarTarea(item._id)} 
+              >
+                Eliminar
+              </button>
+            </tbody>
+          ))}
+        </table>
+      </div>
      
     </div>
   );
